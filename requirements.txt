@@ -1,6 +1,6 @@
-pandas==3.0.1
-streamlit==1.54.0
-seaborn==0.13.2
-matplotlib==3.10.8
-xlsxwriter==3.2.9
-protobuf==6.33.4
+pandas>=2.0,<3.0
+streamlit>=1.40.0,<1.55.0
+seaborn>=0.13.0
+matplotlib>=3.9.0
+xlsxwriter>=3.2.0
+protobuf>=5.29.0
