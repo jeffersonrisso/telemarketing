@@ -29,15 +29,15 @@ def multiselect_filter(_relatorio, col, selecionados):
 
 # Função para converter o df para csv
 @st.cache_data
-def convert_df(df):
-    return df.to_csv(index=False).encode('utf-8')
+def convert_df(_df):
+    return _df.to_csv(index=False).encode('utf-8')
 
 # Função para converter o df para excel
 @st.cache_data
-def to_excel(df):
+def to_excel(_df):
     output = BytesIO()
     with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-        df.to_excel(writer, index=False, sheet_name='Sheet1')
+        _df.to_excel(writer, index=False, sheet_name='Sheet1')
     processed_data = output.getvalue()
     return processed_data
 
