@@ -181,6 +181,7 @@ def main():
         st.write('## Proporção de aceite')
         # PLOTS
         if graph_type == 'Barras':
+            # Gráfico de barras
             sns.barplot(x=bank_raw_target_perc.index,
                         y='y',
                         data=bank_raw_target_perc,
@@ -188,6 +189,8 @@ def main():
             ax[0].bar_label(ax[0].containers[0])
             ax[0].set_title('Dados brutos',
                             fontweight="bold")
+            ax[0].set_xlabel('y')
+            ax[0].set_ylabel('Porcentagem (%)')
 
             sns.barplot(x=bank_target_perc.index,
                         y='y',
@@ -196,14 +199,35 @@ def main():
             ax[1].bar_label(ax[1].containers[0])
             ax[1].set_title('Dados filtrados',
                             fontweight="bold")
+            ax[1].set_xlabel('y')
+            ax[1].set_ylabel('Porcentagem (%)')
         else:
-            bank_raw_target_perc.plot(kind='pie', autopct='%.2f', y='y', ax=ax[0])
+            # Gráfico de pizza - corrigido
+            # Reset o índice para ter 'y' como coluna
+            bank_raw_pie = bank_raw_target_perc.reset_index()
+            bank_raw_pie.columns = ['y', 'percentual']
+            
+            bank_pie = bank_target_perc.reset_index()
+            bank_pie.columns = ['y', 'percentual']
+            
+            # Plotar pizza
+            ax[0].pie(bank_raw_pie['percentual'], 
+                     labels=bank_raw_pie['y'], 
+                     autopct='%.2f%%',
+                     startangle=90,
+                     colors=['#66b3ff', '#ff9999'])
             ax[0].set_title('Dados brutos',
                             fontweight="bold")
+            ax[0].axis('equal')
 
-            bank_target_perc.plot(kind='pie', autopct='%.2f', y='y', ax=ax[1])
+            ax[1].pie(bank_pie['percentual'], 
+                     labels=bank_pie['y'], 
+                     autopct='%.2f%%',
+                     startangle=90,
+                     colors=['#66b3ff', '#ff9999'])
             ax[1].set_title('Dados filtrados',
                             fontweight="bold")
+            ax[1].axis('equal')
 
         st.pyplot(plt)
 
