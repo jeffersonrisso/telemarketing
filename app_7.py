@@ -13,19 +13,19 @@ sns.set_theme(style="ticks", rc=custom_params)
 
 # Função para ler os dados
 @st.cache_data(show_spinner=True)
-def load_data(file_data):
+def load_data(_file_data):
     try:
-        return pd.read_csv(file_data, sep=';')
+        return pd.read_csv(_file_data, sep=';')
     except:
-        return pd.read_excel(file_data)
+        return pd.read_excel(_file_data)
 
 # Função para filtrar baseado na multiseleção de categorias
 @st.cache_data
-def multiselect_filter(relatorio, col, selecionados):
+def multiselect_filter(_relatorio, col, selecionados):
     if 'all' in selecionados:
-        return relatorio
+        return _relatorio
     else:
-        return relatorio[relatorio[col].isin(selecionados)].reset_index(drop=True)
+        return _relatorio[_relatorio[col].isin(selecionados)].reset_index(drop=True)
 
 # Função para converter o df para csv
 @st.cache_data
